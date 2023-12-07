@@ -1,3 +1,4 @@
+
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 
@@ -7,7 +8,7 @@ import JournalList from './JournalList'
 import imageDossierOpen from './assets/dossierOpen.svg';
 import imageDossierClosed from './assets/dossierClosed.svg';
 import imageDossierDelete from './assets/dossierDelete.svg';
-
+import JournalItemImage2 from './JournalItemImage2'
 
 
 export default function JournalItem({ item, deleteListener, session }) {
@@ -51,19 +52,26 @@ export default function JournalItem({ item, deleteListener, session }) {
     console.log("bg 44444444 item.id " + item.id + "  session ", session2)
     return (
         <div>
-            <div style={{border: 'solid',textAlign: 'left'}}>
-                <button onClick={toggleDetails} style={{ border: 'none', backgroundColor: 'transparent',marginLeft: '0' }}>
-                    <img src={showDetails ? imageDossierOpen : imageDossierClosed} alt="Button Image" style={{ width: '20px', height: '20px' }} />
+            <div style={containerStyles}>
+                <div style={{ border: 'solid',}}>
+                <button onClick={toggleDetails} style={styleButton}>
+                    <img src={showDetails ? imageDossierOpen : imageDossierClosed} alt="Button Image" style={styleImage} />
                 </button>
 
 
-                <button onClick={deleteItem} style={{ border: 'none', backgroundColor: 'transparent' }}>
-                    <img src={imageDossierDelete} style={{ width: '20px', height: '20px' }} />
+                <button onClick={deleteItem} style={styleButton}>
+                    <img src={imageDossierDelete} style={styleImage} />
                 </button>
+                </div>
                 {item.titre}
+
+                <div style={alignRightStyles}>
+                    <JournalItemImage2></JournalItemImage2>
+                </div>
             </div>
+
             {showDetails && (
-                <div style={{border: 'solid',marginLeft:'100px',textAlign: 'left'}}>
+                <div style={{ border: 'solid', marginLeft: '100px', textAlign: 'left' }}>
                     <p>Id: {item.id}</p>
                     <p>Description: {item.description}</p>
                     <JournalList session={session2} idParent={item.id} isRoot={false} />
@@ -75,3 +83,21 @@ export default function JournalItem({ item, deleteListener, session }) {
         </div>
     );
 };
+// prompt chatgpt : react style display align right inline after an element on the same line
+const containerStyles = {
+    display: 'flex', // Or use display: 'grid';
+    justifyContent: 'space-between', // Or any other alignment option
+    border: '2px solid white'
+};
+
+const alignRightStyles = {
+    textAlign: 'right',
+    border: 'solid'
+};
+
+const styleButton = {
+    border: '2px solid green',padding: '0', backgroundColor: 'transparent', marginLeft: '0',
+}
+const styleImage = {
+    border: '2px solid red',margin:'0px', width: '50px', height: '50px'
+}

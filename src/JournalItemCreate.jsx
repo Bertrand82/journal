@@ -5,6 +5,9 @@ import Auth from './Auth'
 import Account from './Account'
 import JournalList from './JournalList'
 import imageNew from './assets/newitem.svg';
+import imageUploadImage from './assets/uploadlogo.svg'
+import Avatar from './Avatar'
+
 
 
 
@@ -15,6 +18,7 @@ export default function CreateItem(props) {
     const [id, setId] = useState(null)
     const [loading, setLoading] = useState(true)
     const [isVisibleFormCreate, setIsVisibleFormCreate] = useState(false)
+    const [isVisibleFormCreateImage , setIsVisibleFormCreateImage] = useState(false)
     const [isRoot, setIsRoot] = useState(props.isRoot)
 
 
@@ -31,7 +35,7 @@ export default function CreateItem(props) {
             parentid: parent,
             titre: titre,
             description: description,
-            isroot:isRoot
+            isroot: isRoot
 
         }
         console.log('createJournal2 insert updates', createObject)
@@ -49,9 +53,18 @@ export default function CreateItem(props) {
 
     }
 
+    const formCreateImage = () => {
+        return (
+            <div>
+                <div>Create form Image</div> 
+                <Avatar onUpload={(event, url) => { console.log("on upload image no implmented yet")}}></Avatar>
+            </div>
+            )
+    }
     const formCreate = () => {
         return (
-            <div><h2> Create form !!!!!!!!!!!!!!!!!!!!!!!</h2>
+            <div>
+                <div>Create form</div> 
                 <div>
                     <label htmlFor="parent">Parent</label>
                     <input
@@ -94,12 +107,16 @@ export default function CreateItem(props) {
     return (
         <div>
             <div>
-                  <button onClick={() => setIsVisibleFormCreate(!isVisibleFormCreate)} style={{ border: 'none', backgroundColor: 'transparent' }}>
+                <button onClick={() => setIsVisibleFormCreate(!isVisibleFormCreate)} style={{ border: 'none', backgroundColor: 'transparent' }}>
                     <img src={imageNew} style={{ width: '20px', height: '20px' }} />
-                </button>
+                    </button>
+                    <button onClick={() => setIsVisibleFormCreateImage(!isVisibleFormCreateImage)} style={{ border: 'none', backgroundColor: 'transparent' }}>
+                        <img src={imageUploadImage} style={{ width: '20px', height: '20px' }} />
+                    </button>
             </div>
             <div>
-                {isVisibleFormCreate && formCreate()}
+            {isVisibleFormCreate && formCreate()}
+            {isVisibleFormCreateImage && formCreateImage()}
 
             </div>
         </div>

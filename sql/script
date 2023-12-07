@@ -27,3 +27,5 @@ $$ LANGUAGE plpgsql;
 
 -- Call the function to create the table
 SELECT create_journal_table();
+
+
