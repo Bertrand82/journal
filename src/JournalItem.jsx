@@ -2,13 +2,12 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 
-import CreateItem from './JournalItemCreate'
-import Avatar from './Avatar_deprecated'
+
 import JournalList from './JournalList'
 import imageDossierOpen from './assets/dossierOpen.svg';
 import imageDossierClosed from './assets/dossierClosed.svg';
 import imageDossierDelete from './assets/dossierDelete.svg';
-import JournalItemImage2 from './JournalItemImage2'
+
 
 
 export default function JournalItem({ item, deleteListener, session }) {

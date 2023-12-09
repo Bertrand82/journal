@@ -14,6 +14,11 @@ Synthese globale:
 1. presentation des données sous forme  synthetique d'un ensemble d'experiences
 
 # Start appli
+voir https://supabase.com/docs/guides/getting-started/tutorials/with-react
+> npm create vite@latest bg-journal -- --template react
+cd bg-journal
+> npm install @supabase/supabase-js
+
 
 > npm run dev
 

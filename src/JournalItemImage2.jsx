@@ -2,16 +2,11 @@
 
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
-import Auth from './Auth'
-import Account from './Account'
-import JournalList from './JournalList'
-import imageNew from './assets/newitem.svg';
-import imageUploadImage from './assets/uploadlogo.svg'
+
 import interrogation from './assets/interrogation.svg'
 
 import React from 'react';
-import ReactDOM from 'react-dom';
-import styled from 'styled-components';
+
 import { v4 as uuidv4 } from 'uuid'
 
 export default function JournalItemImage2(props) {

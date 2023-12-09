@@ -1,12 +1,7 @@
 import './App.css'
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
-import Auth from './Auth'
-import Account from './Account'
-import JournalList from './JournalList'
-import imageNew from './assets/newitem.svg';
-import imageUploadImage from './assets/uploadlogo.svg'
-import Avatar from './Avatar_deprecated'
+import imageNew from './assets/newitem.svg'
 import JournalItemImage2 from './JournalItemImage2'
 
 

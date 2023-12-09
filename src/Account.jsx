@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
-import Avatar from './Avatar_deprecated'
+import Avatar from './Avatar'
 import Journal from './JournalList'
 
 

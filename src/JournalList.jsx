@@ -2,7 +2,7 @@ import { useState, useEffect, useCallback } from 'react'
 import { supabase } from './supabaseClient'
 import JournalItem from './JournalItem'
 import CreateItem from './JournalItemCreate'
-import Avatar from './Avatar_deprecated'
+
 
 
 export default function JournalList(props) {
