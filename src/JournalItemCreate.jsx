@@ -6,7 +6,7 @@ import Account from './Account'
 import JournalList from './JournalList'
 import imageNew from './assets/newitem.svg';
 import imageUploadImage from './assets/uploadlogo.svg'
-import Avatar from './Avatar'
+import Avatar from './Avatar_deprecated'
 import JournalItemImage2 from './JournalItemImage2'
 
 
