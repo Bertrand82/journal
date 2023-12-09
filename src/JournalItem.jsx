@@ -14,6 +14,7 @@ import JournalItemImage2 from './JournalItemImage2'
 export default function JournalItem({ item, deleteListener, session }) {
     const [showDetails, setShowDetails] = useState(false);
     const [session2, setSession2] = useState(session)
+    const [urlImage, setUrlImage] = useState(null)
 
     const toggleDetails = () => {
         setShowDetails(!showDetails);
@@ -26,6 +27,21 @@ export default function JournalItem({ item, deleteListener, session }) {
     }
     const createItemListener = () => {
         console.log("bg create item listener")
+    }
+
+    async function downloadImage(pathImage) {
+        if (pathImage) {
+            try {
+                const { data, error } = await supabase.storage.from('avatars').download(pathImage)
+                if (error) {
+                    throw error
+                }
+                const urlImage = URL.createObjectURL(data)
+                setImageUrl(urlImage)
+            } catch (error) {
+                console.log('Error downloading image: ', error.message)
+            }
+        }
     }
 
     async function deleteItemById() {
@@ -49,24 +65,33 @@ export default function JournalItem({ item, deleteListener, session }) {
         }
     }
 
+    const onClickImage = () => {
+        console.log("on click image bg")
+    }
+
     console.log("bg 44444444 item.id " + item.id + "  session ", session2)
     return (
         <div>
             <div style={containerStyles}>
-                <div style={{ border: 'solid',}}>
-                <button onClick={toggleDetails} style={styleButton}>
-                    <img src={showDetails ? imageDossierOpen : imageDossierClosed} alt="Button Image" style={styleImage} />
-                </button>
+                <div style={{ border: 'solid', }}>
+                    <button onClick={toggleDetails} style={styleButton}>
+                        <img src={showDetails ? imageDossierOpen : imageDossierClosed} alt="Button Image" style={styleImage} />
+                    </button>
 
 
-                <button onClick={deleteItem} style={styleButton}>
-                    <img src={imageDossierDelete} style={styleImage} />
-                </button>
+                    <button onClick={deleteItem} style={styleButton}>
+                        <img src={imageDossierDelete} style={styleImage} />
+                    </button>
                 </div>
                 {item.titre}
 
                 <div style={alignRightStyles}>
-                    <JournalItemImage2></JournalItemImage2>
+
+                    <img
+                        onClick={onClickImage}
+                        src={item.urlimage}
+                        style={styleImageVignette} />
+
                 </div>
             </div>
 
@@ -74,6 +99,12 @@ export default function JournalItem({ item, deleteListener, session }) {
                 <div style={{ border: 'solid', marginLeft: '100px', textAlign: 'left' }}>
                     <p>Id: {item.id}</p>
                     <p>Description: {item.description}</p>
+                    <p>
+                        <img
+                            onClick={onClickImage}
+                            src={item.image}
+                            style={styleImageDetail} />
+                    </p>
                     <JournalList session={session2} idParent={item.id} isRoot={false} />
                     {/* Other item details */}
 
@@ -96,8 +127,16 @@ const alignRightStyles = {
 };
 
 const styleButton = {
-    border: '2px solid green',padding: '0', backgroundColor: 'transparent', marginLeft: '0',
+    border: '2px solid green', padding: '0', backgroundColor: 'transparent', marginLeft: '0',
 }
 const styleImage = {
-    border: '2px solid red',margin:'0px', width: '50px', height: '50px'
+    border: '2px solid red', margin: '0px', width: '50px', height: '50px'
+}
+const styleImageVignette = {
+    height: '50px',
+    border: '5px solid red',
+}
+const styleImageDetail = {
+    weight: '80px',
+    border: '5px solid red',
 }

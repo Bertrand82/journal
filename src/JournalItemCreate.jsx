@@ -7,6 +7,7 @@ import JournalList from './JournalList'
 import imageNew from './assets/newitem.svg';
 import imageUploadImage from './assets/uploadlogo.svg'
 import Avatar from './Avatar'
+import JournalItemImage2 from './JournalItemImage2'
 
 
 
@@ -15,27 +16,35 @@ export default function CreateItem(props) {
     const [parent, setParent] = useState(props.idParent)
     const [titre, setTitre] = useState(null)
     const [description, setDescription] = useState(null)
+    const [urlImage, setUrlImage] = useState(null)
     const [id, setId] = useState(null)
     const [loading, setLoading] = useState(true)
     const [isVisibleFormCreate, setIsVisibleFormCreate] = useState(false)
-    const [isVisibleFormCreateImage , setIsVisibleFormCreateImage] = useState(false)
     const [isRoot, setIsRoot] = useState(props.isRoot)
+    const [session, setSession] = useState(props.session)
 
 
     async function createJournalItem(event, avatarUrl) {
         console.log('createJournal2 start event ', event, 'avatarUrl', avatarUrl);
+        setIsVisibleFormCreate(false)
         event.preventDefault()
 
         setLoading(true)
 
-        const { user } = props.session
+        const { user } = session
+        const isR = (parent === undefined || parent === null) 
+        setIsRoot(isR )
+        console.log('bg createJournal2 parent', parent)
+        console.log('bg createJournal2 isRoot', isRoot)
+        console.log('bg createJournal2 isR', isR)
         console.log('createJournal2 user', user)
         const createObject = {
             userid: user.id,
             parentid: parent,
             titre: titre,
             description: description,
-            isroot: isRoot
+            isroot: isR,
+            urlimage : urlImage
 
         }
         console.log('createJournal2 insert updates', createObject)
@@ -53,14 +62,12 @@ export default function CreateItem(props) {
 
     }
 
-    const formCreateImage = () => {
-        return (
-            <div>
-                <div>Create form Image</div> 
-                <Avatar onUpload={(event, url) => { console.log("on upload image no implmented yet")}}></Avatar>
-            </div>
-            )
+    const  setUploadedUrlImage = (urlImage) =>{
+        console.log("bg setUploadedUrlImage "+urlImage)
+        setUrlImage(urlImage)
     }
+
+    
     const formCreate = () => {
         return (
             <div>
@@ -95,6 +102,10 @@ export default function CreateItem(props) {
                     />
                 </div>
                 <div>
+                    <label htmlFor="description">Image</label>
+                    <JournalItemImage2 session={session} onUploadedImage= {setUploadedUrlImage}></JournalItemImage2>
+                </div>
+                <div>
                     <button className="button block primary" type="button" onClick={(event) => createJournalItem(event)} disabled={false}>
                         create
                     </button>
@@ -109,14 +120,12 @@ export default function CreateItem(props) {
             <div>
                 <button onClick={() => setIsVisibleFormCreate(!isVisibleFormCreate)} style={{ border: 'none', backgroundColor: 'transparent' }}>
                     <img src={imageNew} style={{ width: '20px', height: '20px' }} />
-                    </button>
-                    <button onClick={() => setIsVisibleFormCreateImage(!isVisibleFormCreateImage)} style={{ border: 'none', backgroundColor: 'transparent' }}>
-                        <img src={imageUploadImage} style={{ width: '20px', height: '20px' }} />
-                    </button>
+                </button>
+                    
             </div>
             <div>
             {isVisibleFormCreate && formCreate()}
-            {isVisibleFormCreateImage && formCreateImage()}
+         
 
             </div>
         </div>

@@ -29,7 +29,7 @@ export default function JournalList(props) {
             console.log("bg isRoot !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!", isRoot)
             const { data, error } = await supabase
                 .from('journal')
-                .select(`id,userid, parentid, titre, description`)
+                .select(`id,userid, parentid, titre, description,urlimage`)
                 .eq('isroot',true)
             //.eq('userid', user.id)
 
@@ -58,7 +58,7 @@ export default function JournalList(props) {
             console.log("bg NotRoot xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx", isRoot)
             const { data, error } = await supabase
                 .from('journal')
-                .select(`id,userid, parentid, titre, description`)
+                .select(`id,userid, parentid, titre, description,urlimage`)
                 .eq('userid', user.id)
                 .eq('parentid',idParent2)
 
@@ -103,6 +103,7 @@ export default function JournalList(props) {
             parentId,
             titre,
             description,
+            urlimage,
             updated_at: new Date(),
         }
         console.log('updateJournal3 upsert updates', updates)
