@@ -27,6 +27,12 @@ install github  gh
 #
 npm install uuid
 
+# deploy
+
+npm run deploy -- -m "Deploy React app to GitHub Pages"
+
+https://bertrand82.github.io/journal
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
