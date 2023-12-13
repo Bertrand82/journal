@@ -18,6 +18,8 @@ voir https://supabase.com/docs/guides/getting-started/tutorials/with-react
 > npm create vite@latest bg-journal -- --template react
 cd bg-journal
 > npm install @supabase/supabase-js
+install github  gh
+>npm install gh-pages --save-dev
 
 
 > npm run dev
