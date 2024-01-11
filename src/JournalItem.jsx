@@ -69,6 +69,7 @@ export default function JournalItem({ item, deleteListener, session }) {
     }
 
     console.log("bg 44444444 item.id " + item.id + "  session ", session2)
+    console.log("bg 55555555 item.id " + item.id + "  session.user ", session2.user)
     return (
         <div>
             <div style={containerStyles}>

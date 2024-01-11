@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { supabase } from './supabaseClient'
 
-export default function Avatar({ url, size, onUpload }) {
+export default function Avatar({ url, size, onUpload, hideUpload }) {
   const [avatarUrl, setAvatarUrl] = useState(null)
   const [uploading, setUploading] = useState(false)
 
@@ -11,10 +11,12 @@ export default function Avatar({ url, size, onUpload }) {
 
   async function downloadImage(path) {
     try {
+      console.log('bg download image', path)
       const { data, error } = await supabase.storage.from('avatars').download(path)
       if (error) {
         throw error
       }
+      console.log('bg downloadImage data', data)
       const url = URL.createObjectURL(data)
       setAvatarUrl(url)
     } catch (error) {
@@ -62,20 +64,25 @@ export default function Avatar({ url, size, onUpload }) {
         <div className="avatar no-image" style={{ height: size, width: size }} />
       )}
       <div style={{ width: size }}>
-        <label className="button primary block" htmlFor="single">
-          {uploading ? 'Uploading ...' : 'Upload'}
-        </label>
-        <input
-          style={{
-            visibility: 'hidden',
-            position: 'absolute',
-          }}
-          type="file"
-          id="single"
-          accept="image/*"
-          onChange={uploadAvatar}
-          disabled={uploading}
-        />
+
+        {hideUpload ? '' : (
+          <div>
+            <label className="button primary block" htmlFor="single">
+              {uploading ? 'Uploading ...' : 'Upload'}
+            </label>
+            <input
+              style={{
+                visibility: 'hidden',
+                position: 'absolute',
+              }}
+              type="file"
+              id="single"
+              accept="image/*"
+              onChange={uploadAvatar}
+              disabled={uploading}
+            />
+          </div>
+        )}
       </div>
     </div>
   )

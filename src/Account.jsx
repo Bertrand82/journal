@@ -6,9 +6,9 @@ import Journal from './JournalList'
 
 export default function Account({ session }) {
     const [loading, setLoading] = useState(true)
-    const [username, setUsername] = useState(null)
-    const [website, setWebsite] = useState(null)
-    const [avatar_url, setAvatarUrl] = useState(null)
+    const [username, setUsername] = useState()
+    const [website, setWebsite] = useState()
+    const [avatar_url, setAvatarUrl] = useState()
     console.log("bg session" ,session)
     useEffect(() => {
         let ignore = false
@@ -27,9 +27,11 @@ export default function Account({ session }) {
                     console.warn("bg useEffect fail!!!!! ",error)
                     console.warn(error)
                 } else if (data) {
+                    console.log("bg data account-----------------------", data);
                     setUsername(data.username)
                     setWebsite(data.website)
                     setAvatarUrl(data.avatar_url)
+                    
                 }
             }
 
@@ -58,6 +60,7 @@ export default function Account({ session }) {
             avatar_url,
             updated_at: new Date(),
         }
+       
         console.log('updateProfile3 upsert updates',updates)
         const { error } = await supabase.from('profiles').upsert(updates)
 
@@ -65,6 +68,7 @@ export default function Account({ session }) {
             alert(error.message)
         } else {
             setAvatarUrl(avatarUrl)
+           
         }
         setLoading(false)
     }
@@ -117,8 +121,7 @@ export default function Account({ session }) {
             </div>
            
         </form>
-        xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx
-        
+       
         </div>
     )
 }

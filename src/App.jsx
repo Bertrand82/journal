@@ -2,8 +2,8 @@ import './App.css'
 import { useState, useEffect } from 'react'
 import { supabase } from './supabaseClient'
 import Auth from './Auth'
-import Account from './Account'
-import Journal from './JournalList'
+import { Provider } from 'react-redux'
+import store from './store'; // Import the Redux store
 import JournalApp from './JournalApp'
 
 function App() {
@@ -20,9 +20,11 @@ function App() {
   }, [])
 
   return (
-    <div className="container" style={{ padding: '50px 0 100px 0' }}>
-      {!session ? <Auth /> :<div> <JournalApp session={session} /></div>}
-    </div>
+    <Provider store={store}>
+      <div className="container" style={{ padding: '50px 0 100px 0' }}>
+        {!session ? <Auth /> : <div> <JournalApp session={session} /></div>}
+      </div>
+    </Provider>
   )
 }
 
