@@ -48,3 +48,15 @@ Currently, two official plugins are available:
 
 Il faut eventellement modifier le pattern du lien pour le customiser.
 Par exemple rajouter le path derriere l'url
+
+#Configuration url
+Authentification (à gauche dashboard du projet)/URL Configuration
+
+# TODO
+
+Prendre des photos et les rajouter
+Prendre des videos
+Prendre un enregistrement audio
+Gerer les enregistrements audios
+Exporter vers un blog google (Utilisation de l'api blogger)
+

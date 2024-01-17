@@ -26,7 +26,6 @@ function JournalApp({ session }) {
         .eq('id', user.id)
         .single()
 
-
       if (error) {
         console.warn("bg xxxx useEffect fail!!!!! ", error)
         console.warn(error)
@@ -36,8 +35,6 @@ function JournalApp({ session }) {
         setAvatarUrl(data.avatar_url)
         console.log("bg xxxx data-----------------------", avatarUrl);
       }
-
-
     };
     getProfile();
   }, [session])
@@ -48,20 +45,15 @@ function JournalApp({ session }) {
     <div style={stylesContainer} >
       <div style={stylesMenuBg}>
         <button style={(show === showJournal) ? stylesButtonSelected : stylesButtonUnSelected} onClick={() => setShow(showJournal)}>  Journal  </button>
-
         <button style={(show === showAccount) ? stylesButtonSelected : stylesButtonUnSelected} onClick={() => setShow(showAccount)}>  Account </button>
-   
-        <button style={{  border: '2px solid red', borderRadius: 3, right: 80, position: 'absolute' }}> {nom} </button>
-        <div style={{  border: '2px solid white', borderRadius: 3, right: 10, position: 'absolute' }}>
-     
+        <button style={{ border: '2px solid red', borderRadius: 3, right: 80, position: 'absolute' }}> {nom} </button>
+        <div style={{ border: '2px solid red', borderRadius: 3, right: 10, position: 'absolute' }}>
           <Avatar
             url={avatarUrl}
             size={40}
             hideUpload={true}
           />
         </div>
-
-
       </div>
       {(show === showAccount) && <Account key={session.user.id} session={session} />}
       {(show === showJournal) && <JournalList session={session} isRoot={true} />}

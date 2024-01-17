@@ -7,6 +7,7 @@ import JournalList from './JournalList'
 import imageDossierOpen from './assets/dossierOpen.svg';
 import imageDossierClosed from './assets/dossierClosed.svg';
 import imageDossierDelete from './assets/dossierDelete.svg';
+import CameraApp from './CameraApp.jsx';
 
 
 
@@ -73,7 +74,11 @@ export default function JournalItem({ item, deleteListener, session }) {
     return (
         <div>
             <div style={containerStyles}>
+               
                 <div style={{ border: 'solid', }}>
+                <div>
+                
+                </div>
                     <button onClick={toggleDetails} style={styleButton}>
                         <img src={showDetails ? imageDossierOpen : imageDossierClosed} alt="Button Image" style={styleImage} />
                     </button>
@@ -82,6 +87,7 @@ export default function JournalItem({ item, deleteListener, session }) {
                     <button onClick={deleteItem} style={styleButton}>
                         <img src={imageDossierDelete} style={styleImage} />
                     </button>
+
                 </div>
                 {item.titre}
 
@@ -93,6 +99,7 @@ export default function JournalItem({ item, deleteListener, session }) {
                         style={styleImageVignette} />
 
                 </div>
+                
             </div>
 
             {showDetails && (
@@ -105,6 +112,7 @@ export default function JournalItem({ item, deleteListener, session }) {
                             src={item.image}
                             style={styleImageDetail} />
                     </p>
+                    <CameraApp/>
                     <JournalList session={session2} idParent={item.id} isRoot={false} />
                     {/* Other item details */}
 
